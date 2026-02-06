@@ -1,8 +1,8 @@
 "use client"
 
 import React from "react"
-
 import { use } from "react"
+import Image from "next/image"
 import Link from "next/link"
 import { useLocale } from "@/lib/i18n/locale-context"
 import { blogPosts } from "@/lib/blog-data"
@@ -19,7 +19,10 @@ function renderContent(content: string) {
     if (currentParagraph.length > 0) {
       const text = currentParagraph.join("\n")
       elements.push(
-        <p key={`p-${elements.length}`} className="mb-6 text-muted-foreground leading-relaxed">
+        <p
+          key={`p-${elements.length}`}
+          className="mb-6 text-muted-foreground leading-relaxed"
+        >
           {text.split(/(\*\*[^*]+\*\*)/).map((part, i) => {
             if (part.startsWith("**") && part.endsWith("**")) {
               return (
@@ -42,7 +45,7 @@ function renderContent(content: string) {
       elements.push(
         <h2
           key={`h-${elements.length}`}
-          className="mb-4 mt-10 text-xl font-semibold text-foreground"
+          className="mb-4 mt-10 text-xl font-bold text-foreground"
         >
           {line.slice(3)}
         </h2>
@@ -79,7 +82,8 @@ export default function BlogPostPage({
   const postIndex = blogPosts.findIndex((p) => p.slug === slug)
   const post = blogPosts[postIndex]
   const nextPost = blogPosts[(postIndex + 1) % blogPosts.length]
-  const prevPost = blogPosts[(postIndex - 1 + blogPosts.length) % blogPosts.length]
+  const prevPost =
+    blogPosts[(postIndex - 1 + blogPosts.length) % blogPosts.length]
 
   if (!post) {
     return (
@@ -87,7 +91,9 @@ export default function BlogPostPage({
         <SiteHeader />
         <main className="flex min-h-screen items-center justify-center px-6 pt-20">
           <div className="text-center">
-            <h1 className="text-2xl font-semibold text-foreground">Article not found</h1>
+            <h1 className="text-2xl font-semibold text-foreground">
+              Article not found
+            </h1>
             <Link
               href="/blog"
               className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
@@ -108,11 +114,11 @@ export default function BlogPostPage({
     <>
       <SiteHeader />
       <main className="px-6 pt-32 pb-24">
-        <article className="mx-auto max-w-2xl">
+        <article className="mx-auto max-w-3xl">
           {/* Back link */}
           <Link
             href="/blog"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
           >
             <ArrowLeft className="h-4 w-4" />
             {t.blog.allPosts}
@@ -121,11 +127,12 @@ export default function BlogPostPage({
           {/* Header */}
           <div className="mt-8">
             <div className="flex items-center gap-3">
-              <span className="font-mono text-xs text-muted-foreground">{content.category}</span>
-              <span className="text-muted-foreground/30">|</span>
-              <span className="font-mono text-xs text-muted-foreground">{post.date}</span>
+              <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+                {content.category}
+              </span>
+              <span className="text-xs text-muted-foreground">{post.date}</span>
             </div>
-            <h1 className="mt-4 text-balance text-3xl font-semibold tracking-tight text-foreground md:text-4xl">
+            <h1 className="mt-4 text-balance text-3xl font-bold tracking-tight text-foreground md:text-4xl">
               {content.title}
             </h1>
             <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
@@ -133,19 +140,32 @@ export default function BlogPostPage({
             </p>
           </div>
 
-          {/* Divider */}
-          <div className="my-10 h-px bg-border" />
+          {/* Cover image */}
+          <div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-2xl">
+            <Image
+              src={post.image || "/placeholder.svg"}
+              alt={content.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 800px"
+              priority
+            />
+          </div>
 
           {/* Content */}
-          <div className="prose-custom">{renderContent(content.content)}</div>
+          <div className="mt-10">{renderContent(content.content)}</div>
 
           {/* CTA */}
-          <div className="mt-16 flex flex-col items-center rounded-lg border border-border bg-secondary p-10 text-center">
-            <h3 className="text-lg font-semibold text-foreground">{t.contact.title}</h3>
-            <p className="mt-2 text-sm text-muted-foreground">{t.contact.description}</p>
+          <div className="mt-16 flex flex-col items-center rounded-2xl border border-border bg-primary/5 p-10 text-center">
+            <h3 className="text-xl font-bold text-foreground">
+              {t.contact.title}
+            </h3>
+            <p className="mt-2 text-sm text-muted-foreground">
+              {t.contact.description}
+            </p>
             <Link
               href="/#contact"
-              className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+              className="mt-6 inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:shadow-md hover:brightness-110"
             >
               {t.hero.cta}
               <ArrowRight className="h-4 w-4" />
@@ -156,11 +176,11 @@ export default function BlogPostPage({
           <div className="mt-12 grid gap-4 md:grid-cols-2">
             <Link
               href={`/blog/${prevPost.slug}`}
-              className="group flex items-center gap-3 rounded-lg border border-border p-6 transition-colors hover:bg-secondary"
+              className="group flex items-center gap-3 rounded-2xl border border-border p-6 transition-all hover:shadow-md hover:border-primary/20"
             >
-              <ArrowLeft className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:-translate-x-1" />
+              <ArrowLeft className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:-translate-x-1" />
               <div className="min-w-0">
-                <p className="font-mono text-xs text-muted-foreground">Previous</p>
+                <p className="text-xs text-muted-foreground">Previous</p>
                 <p className="mt-1 truncate text-sm font-medium text-foreground">
                   {prevPost[locale].title}
                 </p>
@@ -168,15 +188,15 @@ export default function BlogPostPage({
             </Link>
             <Link
               href={`/blog/${nextPost.slug}`}
-              className="group flex items-center justify-end gap-3 rounded-lg border border-border p-6 text-right transition-colors hover:bg-secondary"
+              className="group flex items-center justify-end gap-3 rounded-2xl border border-border p-6 text-right transition-all hover:shadow-md hover:border-primary/20"
             >
               <div className="min-w-0">
-                <p className="font-mono text-xs text-muted-foreground">Next</p>
+                <p className="text-xs text-muted-foreground">Next</p>
                 <p className="mt-1 truncate text-sm font-medium text-foreground">
                   {nextPost[locale].title}
                 </p>
               </div>
-              <ArrowRight className="h-4 w-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="h-4 w-4 shrink-0 text-primary transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
         </article>

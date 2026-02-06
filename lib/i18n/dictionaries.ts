@@ -10,10 +10,10 @@ export const dictionaries = {
       contact: "Contact",
     },
     hero: {
-      tagline: "Digital Consulting Duo",
-      title: "We build digital products that matter.",
+      tagline: "A collective of builders",
+      title: "Two minds. One mission. Your product, shipped.",
       description:
-        "A two-person consulting group combining DevOps & Backend expertise with Design, Mobile & Frontend mastery. From idea to production, we deliver.",
+        "We are a collective of two friends combining DevOps & Backend expertise with Design, Mobile & Frontend mastery. From idea to production, we deliver together.",
       cta: "Get in touch",
       ctaSecondary: "Our services",
     },
@@ -154,7 +154,7 @@ export const dictionaries = {
       },
     },
     footer: {
-      tagline: "Building digital products that matter.",
+      tagline: "A collective of two friends building digital products that matter.",
       rights: "All rights reserved.",
       navigation: "Navigation",
       legal: "Legal",
@@ -171,10 +171,10 @@ export const dictionaries = {
       contact: "Contact",
     },
     hero: {
-      tagline: "Duo de Consulting Digital",
-      title: "Nous construisons des produits digitaux qui comptent.",
+      tagline: "Un collectif de builders",
+      title: "Deux esprits. Une mission. Votre produit, livre.",
       description:
-        "Un duo de consultants combinant expertise DevOps & Backend avec la maitrise du Design, Mobile & Frontend. De l'idee a la production, nous livrons.",
+        "Nous sommes un collectif de deux amis combinant expertise DevOps & Backend avec la maitrise du Design, Mobile & Frontend. De l'idee a la production, nous livrons ensemble.",
       cta: "Nous contacter",
       ctaSecondary: "Nos services",
     },
@@ -315,7 +315,7 @@ export const dictionaries = {
       },
     },
     footer: {
-      tagline: "Construire des produits digitaux qui comptent.",
+      tagline: "Un collectif de deux amis qui construisent des produits digitaux qui comptent.",
       rights: "Tous droits reserves.",
       navigation: "Navigation",
       legal: "Legal",

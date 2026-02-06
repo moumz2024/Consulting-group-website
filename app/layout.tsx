@@ -12,9 +12,9 @@ const _spaceMono = Space_Mono({
 })
 
 export const metadata: Metadata = {
-  title: "Duo Digital | Consulting & Development",
+  title: "le collectif | Consulting & Development",
   description:
-    "A two-person consulting group combining DevOps, Backend, Design, Mobile & Frontend expertise. We build digital products that matter.",
+    "A collective of two friends combining DevOps, Backend, Design, Mobile & Frontend expertise. We build digital products that matter.",
   generator: "v0.app",
 }
 
